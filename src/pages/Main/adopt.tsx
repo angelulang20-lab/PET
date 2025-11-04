@@ -66,7 +66,7 @@ function Adopt() {
   };
 
   const goBack = () => {
-    navigate(-1);
+    navigate("/game");
   };
 
   const getPetImage = () => {
@@ -195,11 +195,11 @@ function Adopt() {
                 <option value="">Select pet type</option>
                 <option value="Dog">Dog</option>
                 <option value="Cat">Cat</option>
-                <option value="Rabbit">Rabbit</option>
+                {/* <option value="Rabbit">Rabbit</option>
                 <option value="Bird">Bird</option>
                 <option value="Fish">Fish</option>
                 <option value="Hamster">Hamster</option>
-                <option value="Other">Other</option>
+                <option value="Other">Other</option> */}
               </select>
             </div>
 
