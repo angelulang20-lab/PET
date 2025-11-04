@@ -213,7 +213,6 @@ function Adopt() {
                 <option value="Bird">Bird</option>
                 <option value="Fish">Fish</option>
                 <option value="Hamster">Hamster</option>
-                <option value="Other">Other</option>
               </select>
             </div>
 

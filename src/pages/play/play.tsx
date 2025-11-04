@@ -37,6 +37,30 @@ const PET_TYPES = [
     likes: ["carrots", "grass", "fresh vegetables"],
     dislikes: ["avocado", "onions", "potatoes"],
   },
+  {
+    type: "Bird",
+    displayName: "Bird",
+    image:
+      "https://images.unsplash.com/photo-1555169062-013468b47731?w=400&h=400&fit=crop",
+    likes: ["seeds", "fruits", "singing"],
+    dislikes: ["loud noises", "predators", "drafts"],
+  },
+  {
+    type: "Fish",
+    displayName: "Fish",
+    image:
+      "https://images.unsplash.com/photo-1535591273668-578e31182c4f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+    likes: ["fish food", "clean water", "plants"],
+    dislikes: ["dirty water", "overfeeding", "loud vibrations"],
+  },
+  {
+    type: "Hamster",
+    displayName: "Hamster",
+    image:
+      "https://plus.unsplash.com/premium_photo-1723541849330-cab9c6ed74d4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1112",
+    likes: ["seeds", "running wheel", "tunnels"],
+    dislikes: ["bright lights", "loud noises", "wet bedding"],
+  },
 ];
 
 const FOOD_ITEMS = [
