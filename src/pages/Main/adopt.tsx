@@ -1,7 +1,20 @@
 import CustomCard from "@/components/CustomCard";
 import { HeaderOne, HeaderTwo } from "@/components/headers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+
+const petImages = {
+  Dog: "https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=400&fit=crop",
+  Cat: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop",
+  Rabbit:
+    "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=400&h=400&fit=crop",
+  Bird: "https://images.unsplash.com/photo-1555169062-013468b47731?w=400&h=400&fit=crop",
+  Fish: "https://images.unsplash.com/photo-1535591273668-578e31182c4f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+  Hamster:
+    "https://plus.unsplash.com/premium_photo-1723541849330-cab9c6ed74d4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1112",
+  Other:
+    "https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=400&h=400&fit=crop",
+};
 
 function Adopt() {
   const navigate = useNavigate();
@@ -9,21 +22,15 @@ function Adopt() {
   const [formData, setFormData] = useState({
     petName: "",
     petType: "",
-    likes: ["Sleeping", "Playing","Walking", ],
+    likes: ["Sleeping", "Playing", "Walking"],
     dislikes: ["Vegetables", "Loud noises"],
   });
 
-  const [currentView, setCurrentView] = useState("form"); 
+  const [currentView, setCurrentView] = useState("form");
 
-  const petImages = {
-    Dog: "https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=400&fit=crop",
-    Cat: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop",
-    Rabbit: "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=400&h=400&fit=crop",
-    Bird: "https://images.unsplash.com/photo-1555169062-013468b47731?w=400&h=400&fit=crop",
-    Fish: "https://images.unsplash.com/photo-1535591273668-578e31182c4f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
-    Hamster: "https://plus.unsplash.com/premium_photo-1723541849330-cab9c6ed74d4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1112",
-    Other: "https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=400&h=400&fit=crop"
-  };
+  useEffect(() => {
+    localStorage.clear()
+  }, [])
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({
@@ -41,14 +48,16 @@ function Adopt() {
     alert(
       `🎉 Congratulations! You adopted ${formData.petName} the ${formData.petType}!`
     );
-    localStorage.setItem("petName", formData.petName)
-    localStorage.setItem("petType", formData.petType)
+    localStorage.setItem("petName", formData.petName);
+    localStorage.setItem("petType", formData.petType);
+
+    navigate("/game")
 
     // Reset form after adoption
     setFormData({
       petName: "",
       petType: "",
-      likes: ["Sleeping", "Playing","Walking",],
+      likes: ["Sleeping", "Playing", "Walking"],
       dislikes: ["Vegetables", "Loud noises"],
     });
   };
@@ -70,9 +79,10 @@ function Adopt() {
   };
 
   const getPetImage = () => {
-    return petImages[formData.petType as keyof typeof petImages] || petImages.Other;
+    return (
+      petImages[formData.petType as keyof typeof petImages] || petImages.Other
+    );
   };
-
 
   if (currentView === "details") {
     return (
@@ -83,8 +93,8 @@ function Adopt() {
             <div className="text-center mb-8">
               {/* Circular Pet Image */}
               <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-300 mx-auto mb-4 shadow-md">
-                <img 
-                  src={getPetImage()} 
+                <img
+                  src={getPetImage()}
                   alt={formData.petType}
                   className="w-full h-full object-cover"
                 />
@@ -107,7 +117,9 @@ function Adopt() {
                     key={index}
                     className="bg-green-100 border border-green-300 rounded-full px-4 py-2"
                   >
-                    <span className="text-green-800 font-medium text-sm">{like}</span>
+                    <span className="text-green-800 font-medium text-sm">
+                      {like}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -125,7 +137,9 @@ function Adopt() {
                     key={index}
                     className="bg-red-100 border border-red-300 rounded-full px-4 py-2"
                   >
-                    <span className="text-red-800 font-medium text-sm">{dislike}</span>
+                    <span className="text-red-800 font-medium text-sm">
+                      {dislike}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -195,11 +209,11 @@ function Adopt() {
                 <option value="">Select pet type</option>
                 <option value="Dog">Dog</option>
                 <option value="Cat">Cat</option>
-                {/* <option value="Rabbit">Rabbit</option>
+                <option value="Rabbit">Rabbit</option>
                 <option value="Bird">Bird</option>
                 <option value="Fish">Fish</option>
                 <option value="Hamster">Hamster</option>
-                <option value="Other">Other</option> */}
+                <option value="Other">Other</option>
               </select>
             </div>
 

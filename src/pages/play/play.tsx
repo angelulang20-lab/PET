@@ -150,7 +150,11 @@ function Play() {
   const [pet, setPet] = useState<{
     petName: string | null;
     petType: string | null;
-  } | null>(null);
+  } | null>({
+    petName: localStorage.getItem("petName"),
+    petType: localStorage.getItem("petType"),
+  });
+
   const selectedTypeData = pet
     ? PET_TYPES.find((p) => p.type === pet.petType)
     : null;
@@ -160,11 +164,10 @@ function Play() {
       petName: localStorage.getItem("petName"),
       petType: localStorage.getItem("petType"),
     });
-    console.log(localStorage.getItem("petType"));
-    console.log(localStorage.getItem("petName"));
-    //  if (!pet) {
-    //          navigate('/')
-    //     }
+    console.log("pet: ", pet);
+    if (!pet) {
+      navigate("/");
+    }
   }, []);
 
   const buttonStyle =
@@ -319,15 +322,14 @@ function Play() {
   // Patay haha
   useEffect(() => {
     if (energyValue <= 0 || hungerValue <= 0 || happyValue <= 0) {
-      localStorage.removeItem("pet");
-      toast.warning("NOOO! YOUR PET DIED!💀 Returning to home...", {
-        position: "bottom-center",
-      });
+      localStorage.clear();
+
+      alert("Your pet died!");
       navigate("/");
     }
-  }, [energyValue, hungerValue, happyValue, navigate]);
+  }, [energyValue, hungerValue, happyValue]);
 
-  if (!pet || !selectedTypeData) {
+  if (!pet) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 py-8">
         <div className="container mx-auto px-4 text-center">

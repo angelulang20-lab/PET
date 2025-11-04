@@ -5,13 +5,22 @@ import { useEffect, useState } from "react";
 
 function HomePage() {
   const navigate = useNavigate();
-  const [pet, setPet] = useState<{ petName: string | null, petType: string | null } | null>(null);
+  const [pet, setPet] = useState<{
+    petName: string | null;
+    petType: string | null;
+  } | null>({
+    petName: localStorage.getItem("petName"),
+    petType: localStorage.getItem("petType"),
+  });
 
   useEffect(() => {
-    setPet({"petName":localStorage.getItem("petName"),"petType": localStorage.getItem("petType")})
-    console.log(pet)
-
-  },[])
+    setPet({
+      petName: localStorage.getItem("petName"),
+      petType: localStorage.getItem("petType"),
+    });
+    console.log("pet: ", pet);
+    console.log("test: ", pet?.petName != null);
+  }, []);
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 p-4">
@@ -33,7 +42,7 @@ function HomePage() {
         <CardContent className="space-y-4 mt-8">
           <Button
             onClick={() => navigate("/adopt")}
-            disabled={!pet}
+            disabled={pet?.petName != null}
             className="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-3 text-lg h-12"
           >
             Adopt Pet
@@ -41,7 +50,7 @@ function HomePage() {
 
           <Button
             onClick={() => navigate("/game")}
-            disabled={!pet}
+            disabled={pet?.petName == null}
             variant={pet ? "default" : "outline"}
             className={`w-full py-3 text-lg h-12 ${
               pet ? "bg-emerald-500 hover:bg-emerald-600" : ""
